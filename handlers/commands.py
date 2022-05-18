@@ -1,8 +1,7 @@
 from main import dp, bot
 from aiogram.types import Message
 from tools.states import User_state
-from handlers.custom import get_last_task, get_task_number
-from aiogram.dispatcher import FSMContext
+from tools.func import get_last_task, get_task_number
 
 last_task = {}
 
@@ -18,7 +17,6 @@ async def get_task(message: Message):
 async def new_task(message: Message):
     task = await get_last_task()
     message.text = task
-
     if not last_task.get(message.from_user.id, False):
         last_task[message.from_user.id] = task
         return await get_task_number(message)
